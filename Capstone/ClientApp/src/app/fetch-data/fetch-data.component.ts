@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
+import { getegid } from 'process';
 
 @Component({
   selector: 'app-fetch-data',
@@ -20,15 +21,11 @@ export class FetchDataComponent {
 
   //Post method and contents for cart items
 
-  cartItemForm = this.fb.group({
-    productId: ['']
-  });
+  onClick(event) {
+    var target = event.target;
+    var productId = target.attributes.id;
 
-  onSubmit() {
-
-    const formContents = this.cartItemForm.value;
-    console.log(formContents);
-    //this.http.post<CartItem>(this.baseUrl + 'api/CartItems', formContents).subscribe();
+    this.http.post<CartItem>(this.baseUrl + 'api/CartItems', productId).subscribe();
 
   }
 

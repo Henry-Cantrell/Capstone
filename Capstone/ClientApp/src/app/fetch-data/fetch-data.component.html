@@ -1,27 +1,23 @@
-<h1 id="tableLabel">Product listing</h1>
-
-<p>This component demonstrates fetching data from the server, as well as posting.</p>
+<h1 id="tableLabel">Product Selection</h1>
 
 <p *ngIf="!products"><em>Loading...</em></p>
 
-<form [formGroup]="cartItemForm" (ngSubmit)="onSubmit()">
-  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products">
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.price }}</td>
-        <td formControlName="productId">{{product.Id}}</td>
-        <td><button type="submit" [disabled]="!cartItemForm.valid">Cart</button></td>
-      </tr>
-    </tbody>
-  </table>
-</form>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.price }}</td>
+      <td><button type="submit" id="{{product.id}}" (click)="onClick($event)">Cart</button></td>
+    </tr>
+  </tbody>
+</table>
+
 
