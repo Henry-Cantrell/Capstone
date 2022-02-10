@@ -4,35 +4,24 @@
 
 <p *ngIf="!products"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.name }}</td>
-      <td>{{ product.description }}</td>
-      <td>{{ product.price }}</td>
-      <td><button>Cart</button></td>
-    </tr>
-  </tbody>
-</table>
-
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-
-  <label for="name">Name: </label>
-  <input id="name" type="text" formControlName="name">
-
-  <label for="description">Description: </label>
-  <input id="description" type="text" formControlName="description">
-
-  <label for="price">Price: </label>
-  <input id="price" type="number" formControlName="price">
-
-  <button type="submit" [disabled]="!productForm.valid">Submit</button>
-
+<form [formGroup]="cartItemForm" (ngSubmit)="onSubmit()">
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td formControlName="productId">{{product.Id}}</td>
+        <td><button type="submit" [disabled]="!cartItemForm.valid">Cart</button></td>
+      </tr>
+    </tbody>
+  </table>
 </form>
+

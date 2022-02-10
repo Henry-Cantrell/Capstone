@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Capstone.Models;
+using System.ServiceModel.Channels;
 
 namespace Capstone.Controllers
 {
@@ -24,6 +25,7 @@ namespace Capstone.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CartItem>>> Getcartitem()
         {
+            //fetch cart items, filter by ID and serve filtered list to frontend
             return await _context.cartitem.ToListAsync();
         }
 
@@ -77,6 +79,7 @@ namespace Capstone.Controllers
         [HttpPost]
         public async Task<ActionResult<CartItem>> PostCartItem(CartItem cartItem)
         {
+            cartItem.CustomerId = null; //fetch current userId and define here
             _context.cartitem.Add(cartItem);
             await _context.SaveChangesAsync();
 

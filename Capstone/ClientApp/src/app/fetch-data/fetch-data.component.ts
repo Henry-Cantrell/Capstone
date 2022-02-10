@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class FetchDataComponent {
 
-  //Get method and contents
+  //Get method and contents for product displaying
 
   public products: Product[];
 
@@ -18,17 +18,18 @@ export class FetchDataComponent {
     }, error => console.error(error));
   }
 
-  //Post method and contents
+  //Post method and contents for cart items
 
-  productForm = this.fb.group({
-    name: [''],
-    description: [''],
-    price: ['']
+  cartItemForm = this.fb.group({
+    productId: ['']
   });
 
   onSubmit() {
-    const formContents = this.productForm.value;
-    this.http.post<Product>(this.baseUrl + 'api/Products', formContents).subscribe();
+
+    const formContents = this.cartItemForm.value;
+    console.log(formContents);
+    //this.http.post<CartItem>(this.baseUrl + 'api/CartItems', formContents).subscribe();
+
   }
 
 }
@@ -38,3 +39,11 @@ interface Product {
   price: number;
   description: string;
 }
+
+interface CartItem {
+  name: string;
+  productId: number;
+  customerId: string;
+}
+
+

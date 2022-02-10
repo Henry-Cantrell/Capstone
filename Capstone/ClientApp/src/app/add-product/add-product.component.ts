@@ -25,6 +25,7 @@ export class AddProductComponent {
 }
 
 interface Product {
+  Id: Number,
   name: string;
   price: number;
   description: string;
