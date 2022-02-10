@@ -1,14 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models
 {
     public class Product
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public int price { get; set; }
+    }
+    public class CartItem { 
+    public int Id { get; set; }
+    public string CustomerId { get; set; }
+    [ForeignKey("product")]
+    public int ProductId { get; set; }
+    public Product product { get; set; }
     }
     public class ProductContext : DbContext
     {
@@ -17,5 +25,6 @@ namespace Capstone.Models
 
         }
         public DbSet<Product> product { get; set; }
+        public DbSet<CartItem> cartitem { get; set; }
     }
 }

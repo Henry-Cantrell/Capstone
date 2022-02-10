@@ -11,47 +11,47 @@ namespace Capstone.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class CartItemsController : ControllerBase
     {
         private readonly ProductContext _context;
 
-        public ProductsController(ProductContext context)
+        public CartItemsController(ProductContext context)
         {
             _context = context;
         }
 
-        // GET: api/Products
+        // GET: api/CartItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> Getproduct()
+        public async Task<ActionResult<IEnumerable<CartItem>>> Getcartitem()
         {
-            return await _context.product.ToListAsync();
+            return await _context.cartitem.ToListAsync();
         }
 
-        // GET: api/Products/5
+        // GET: api/CartItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<CartItem>> GetCartItem(int id)
         {
-            var product = await _context.product.FindAsync(id);
+            var cartItem = await _context.cartitem.FindAsync(id);
 
-            if (product == null)
+            if (cartItem == null)
             {
                 return NotFound();
             }
 
-            return product;
+            return cartItem;
         }
 
-        // PUT: api/Products/5
+        // PUT: api/CartItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        public async Task<IActionResult> PutCartItem(int id, CartItem cartItem)
         {
-            if (id != product.Id)
+            if (id != cartItem.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Entry(cartItem).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace Capstone.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!CartItemExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace Capstone.Controllers
             return NoContent();
         }
 
-        // POST: api/Products
+        // POST: api/CartItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<CartItem>> PostCartItem(CartItem cartItem)
         {
-            _context.product.Add(product);
+            _context.cartitem.Add(cartItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+            return CreatedAtAction("GetCartItem", new { id = cartItem.Id }, cartItem);
         }
 
-        // DELETE: api/Products/5
+        // DELETE: api/CartItems/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteCartItem(int id)
         {
-            var product = await _context.product.FindAsync(id);
-            if (product == null)
+            var cartItem = await _context.cartitem.FindAsync(id);
+            if (cartItem == null)
             {
                 return NotFound();
             }
 
-            _context.product.Remove(product);
+            _context.cartitem.Remove(cartItem);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ProductExists(int id)
+        private bool CartItemExists(int id)
         {
-            return _context.product.Any(e => e.Id == id);
+            return _context.cartitem.Any(e => e.Id == id);
         }
     }
 }

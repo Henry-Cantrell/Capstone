@@ -1,6 +1,6 @@
 <h1 id="tableLabel">Product listing</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>This component demonstrates fetching data from the server, as well as posting.</p>
 
 <p *ngIf="!products"><em>Loading...</em></p>
 
@@ -17,6 +17,22 @@
       <td>{{ product.name }}</td>
       <td>{{ product.description }}</td>
       <td>{{ product.price }}</td>
+      <td><button>Cart</button></td>
     </tr>
   </tbody>
 </table>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+  <label for="name">Name: </label>
+  <input id="name" type="text" formControlName="name">
+
+  <label for="description">Description: </label>
+  <input id="description" type="text" formControlName="description">
+
+  <label for="price">Price: </label>
+  <input id="price" type="number" formControlName="price">
+
+  <button type="submit" [disabled]="!productForm.valid">Submit</button>
+
+</form>

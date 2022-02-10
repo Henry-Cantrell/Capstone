@@ -3,22 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  selector: 'app-add-product',
+  templateUrl: './add-product.component.html'
 })
-export class FetchDataComponent {
-
-  //Get method and contents
-
-  public products: Product[];
+export class AddProductComponent {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private fb: FormBuilder) {
-    http.get<Product[]>(baseUrl + 'api/Products').subscribe(result => {
-      this.products = result;
-    }, error => console.error(error));
   }
-
-  //Post method and contents
 
   productForm = this.fb.group({
     name: [''],
