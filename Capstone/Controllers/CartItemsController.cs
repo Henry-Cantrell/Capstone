@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Capstone.Models;
 using System.ServiceModel.Channels;
+using System.Security.Claims;
 
 namespace Capstone.Controllers
 {
@@ -79,7 +80,26 @@ namespace Capstone.Controllers
         [HttpPost]
         public async Task<ActionResult<CartItem>> PostCartItem(CartItem cartItem)
         {
-            cartItem.CustomerId = null; //fetch current userId and define here
+            //fetch and assign customerId as current user id then assign to passed obj
+            var userIdValue = "";
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            if (claimsIdentity != null)
+            {
+                // the principal identity is a claims identity.
+                // now we need to find the NameIdentifier claim
+                var userIdClaim = claimsIdentity.Claims
+                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+                if (userIdClaim != null)
+                {
+                    userIdValue = userIdClaim.Value;
+                }
+            }
+            
+            cartItem.CustomerId = userIdValue;
+
+            //db transfer
+
             _context.cartitem.Add(cartItem);
             await _context.SaveChangesAsync();
 

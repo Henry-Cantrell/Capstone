@@ -23,9 +23,15 @@ export class FetchDataComponent {
 
   onClick(event) {
     var target = event.target;
-    var productId = target.attributes.id;
+    var ProductId = target.attributes.id.nodeValue * 1;
+    var CustomerId = "";
 
-    this.http.post<CartItem>(this.baseUrl + 'api/CartItems', productId).subscribe();
+    var cartItem = {
+      ProductId: ProductId,
+      CustomerId: CustomerId
+    }
+
+    this.http.post<CartItem>(this.baseUrl + 'api/CartItems', cartItem).subscribe();
 
   }
 
