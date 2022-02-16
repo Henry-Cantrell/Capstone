@@ -27,52 +27,26 @@ namespace Capstone.Controllers
         public async Task<ActionResult<IEnumerable<CartItem>>> Getcartitem()
         {
             //fetch cart items, filter by ID and serve filtered list to frontend
-            return await _context.cartitem.ToListAsync();
-        }
 
-        // GET: api/CartItems/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CartItem>> GetCartItem(int id)
-        {
-            var cartItem = await _context.cartitem.FindAsync(id);
-
-            if (cartItem == null)
+            var userIdValue = "";
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            if (claimsIdentity != null)
             {
-                return NotFound();
-            }
+                // the principal identity is a claims identity.
+                // now we need to find the NameIdentifier claim
+                var userIdClaim = claimsIdentity.Claims
+                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
-            return cartItem;
-        }
-
-        // PUT: api/CartItems/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCartItem(int id, CartItem cartItem)
-        {
-            if (id != cartItem.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(cartItem).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CartItemExists(id))
+                if (userIdClaim != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    userIdValue = userIdClaim.Value;
                 }
             }
 
-            return NoContent();
+            var cartList = await _context.cartitem.ToListAsync();
+            CartItem[] userItems = cartList.Where(c => userIdValue == c.CustomerId).ToArray();
+
+            return userItems;
         }
 
         // POST: api/CartItems

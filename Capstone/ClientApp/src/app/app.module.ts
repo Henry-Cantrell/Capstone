@@ -11,6 +11,7 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { AddProductComponent } from './add-product/add-product.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AddProductComponent } from './add-product/add-product.component';
     NavMenuComponent,
     HomeComponent,
     FetchDataComponent,
-    AddProductComponent
+    AddProductComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,7 +31,8 @@ import { AddProductComponent } from './add-product/add-product.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'add-product', component: AddProductComponent, canActivate: [AuthorizeGuard] }
+      { path: 'add-product', component: AddProductComponent, canActivate: [AuthorizeGuard] },
+      { path: 'cart', component: CartComponent, canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [

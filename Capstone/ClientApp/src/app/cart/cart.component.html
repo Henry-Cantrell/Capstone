@@ -1,0 +1,26 @@
+<h1 id="tableLabel">Your cart</h1>
+
+<p *ngIf="!products"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td><button type="submit" id="{{product.id}}" (click)="onClick($event)">Buy</button></td>
+      <td><button type="submit" id="{{product.id}}" (click)="onClick($event)">Remove</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<button type="submit" id="{{product.id}}" (click)="clearCart()">Purchase All</button>
+
+
+
