@@ -8,12 +8,15 @@
       <th>Name</th>
       <th>Description</th>
       <th>Price</th>
+      <th>Quantity Selected</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let product of products">
       <td>{{ product.name }}</td>
       <td>{{ product.description }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.quantity }}</td>
       <td><button type="submit" id="{{product.id}}" (click)="onBuy($event)">Buy</button></td>
       <td><button type="submit" id="{{product.id}}" (click)="onClick($event)">Remove</button></td>
     </tr>

@@ -30,8 +30,8 @@ export class FetchDataComponent {
     var target = event.target;
     var ProductId = target.attributes.id.nodeValue * 1;
 
-    if (this.getQuantityForm.value) {
-      this.quantity = this.getQuantityForm.value;
+    if (this.getQuantityForm.value.quantity) {
+      this.quantity = Number(this.getQuantityForm.value.quantity);
     }
 
     var cartItem = {
@@ -44,6 +44,7 @@ export class FetchDataComponent {
 
     this.http.get<Product>(this.baseUrl + `api/Products/${ProductId}`).subscribe(result => {
       var updateQuantity = {
+        Id: ProductId,
         name: result.name,
         price: result.price,
         description: result.description,
@@ -56,6 +57,7 @@ export class FetchDataComponent {
 }
 
 interface Product {
+  Id: number;
   name: string;
   price: number;
   description: string;
@@ -65,6 +67,7 @@ interface Product {
 interface CartItem {
   productId: number;
   customerId: string;
+  quantity: number;
 }
 
 

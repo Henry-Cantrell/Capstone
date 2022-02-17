@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class CartComponent {
 
   public products: Product[] = [];
-  public cartList: any[] = [];
+  public cartList: CartItem[] = [];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     http.get<CartItem[]>(baseUrl + 'api/CartItems').subscribe(result => {
@@ -17,6 +17,7 @@ export class CartComponent {
       this.cartList.forEach(function (item) {
         http.get<Product>(baseUrl + `api/Products/${item.productId}`).subscribe(result => {
           result.id = item.id;
+          result.quantity = item.quantity;
           productPlaceHolder.push(result);
         });
       })
@@ -38,7 +39,7 @@ export class CartComponent {
 
     this.http.delete(this.baseUrl + `api/CartItems/${CartItemId}`).subscribe();
 
-    var cartItem = this.cartList.filter(item => item.CartItemId == CartItemId)
+    var cartItem = this.cartList.filter(item => item.id === CartItemId)
 
     var saleItem = {
       productId: cartItem[0].productId,
@@ -65,6 +66,7 @@ interface Product {
   name: string;
   price: number;
   description: string;
+  quantity: number;
 }
 
 interface CartItem {
@@ -74,8 +76,3 @@ interface CartItem {
   customerId: string;
 }
 
-interface SaleItem {
-  productId: number,
-  customerId: string,
-  quantity: number
-}
