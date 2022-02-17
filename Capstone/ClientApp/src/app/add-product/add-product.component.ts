@@ -14,19 +14,21 @@ export class AddProductComponent {
   productForm = this.fb.group({
     name: [''],
     description: [''],
-    price: ['']
+    price: [''],
+    quantity: ['']
   });
 
   onSubmit() {
     const formContents = this.productForm.value;
     this.http.post<Product>(this.baseUrl + 'api/Products', formContents).subscribe();
+    window.location.reload();
   }
 
 }
 
 interface Product {
-  Id: Number,
   name: string;
-  price: number;
   description: string;
+  price: number;
+  quantity: number;
 }

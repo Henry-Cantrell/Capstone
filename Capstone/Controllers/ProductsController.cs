@@ -11,6 +11,25 @@ namespace Capstone.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    public class LowQuantityController : ControllerBase
+    {
+        private readonly ProductContext _context;
+        public LowQuantityController(ProductContext context)
+        {
+            _context = context;
+        }
+        // GET: api/LowQuantityController
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Product>>> Getproduct()
+        {
+            var productList = await _context.product.ToListAsync();
+            Product[] lowQuantityList = productList.Where(c => c.quantity < 5).ToArray();
+            return lowQuantityList;
+        }
+    }
+
+    [Route("api/[controller]")]
+    [ApiController]
     public class ProductsController : ControllerBase
     {
         private readonly ProductContext _context;

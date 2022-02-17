@@ -29,12 +29,33 @@ export class CartComponent {
     var CartItemId = target.attributes.id.nodeValue * 1;
 
     this.http.delete(this.baseUrl + `api/CartItems/${CartItemId}`).subscribe();
+    window.location.reload();
+  }
 
+  onBuy(event) {
+    var target = event.target;
+    var CartItemId = target.attributes.id.nodeValue * 1;
+
+    this.http.delete(this.baseUrl + `api/CartItems/${CartItemId}`).subscribe();
+
+    var cartItem = this.cartList.filter(item => item.CartItemId == CartItemId)
+
+    var saleItem = {
+      productId: cartItem[0].productId,
+      customerId: cartItem[0].customerId,
+      quantity: cartItem[0].quantity
+    }
+
+    this.http.post(this.baseUrl + `api/Sales`, saleItem).subscribe();
+    window.location.reload();
   }
 
   clearCart() {
+    var http = this.http;
+    var baseUrl = this.baseUrl;
     this.cartList.forEach(function (item) {
-      this.http.delete(this.baseUrl + `api/CartItems/${item.id}`).subscribe();
+      http.delete(baseUrl + `api/CartItems/${item.id}`).subscribe();
+      window.location.reload();
     })
   }
 }
@@ -49,5 +70,12 @@ interface Product {
 interface CartItem {
   id: number;
   productId: number;
+  quantity: number;
   customerId: string;
+}
+
+interface SaleItem {
+  productId: number,
+  customerId: string,
+  quantity: number
 }

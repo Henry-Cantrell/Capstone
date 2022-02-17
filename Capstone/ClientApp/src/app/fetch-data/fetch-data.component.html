@@ -2,22 +2,32 @@
 
 <p *ngIf="!products"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.name }}</td>
-      <td>{{ product.description }}</td>
-      <td>{{ product.price }}</td>
-      <td><button type="submit" id="{{product.id}}" (click)="onClick($event)">Cart</button></td>
-    </tr>
-  </tbody>
-</table>
-
+<form [formGroup]="getQuantityForm">
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>
+          <select formControlName="quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </td>
+        <td><button type="submit" id="{{product.id}}" (click)="onClick($event)" [disabled]="!getQuantityForm.valid">Cart</button></td>
+      </tr>
+    </tbody>
+  </table>
+</form>
 

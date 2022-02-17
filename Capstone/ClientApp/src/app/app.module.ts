@@ -12,6 +12,8 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { AddProductComponent } from './add-product/add-product.component';
 import { CartComponent } from './cart/cart.component';
+import { ReorderComponent } from './reorder/reorder.component';
+import { SalesTableComponent } from './sales-table/sales-table.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { CartComponent } from './cart/cart.component';
     HomeComponent,
     FetchDataComponent,
     AddProductComponent,
-    CartComponent
+    CartComponent,
+    ReorderComponent,
+    SalesTableComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,7 +36,9 @@ import { CartComponent } from './cart/cart.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'add-product', component: AddProductComponent, canActivate: [AuthorizeGuard] },
-      { path: 'cart', component: CartComponent, canActivate: [AuthorizeGuard] }
+      { path: 'cart', component: CartComponent, canActivate: [AuthorizeGuard] },
+      { path: 'reorder', component: ReorderComponent, canActivate: [AuthorizeGuard] },
+      { path: 'sales-table', component: SalesTableComponent, canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [

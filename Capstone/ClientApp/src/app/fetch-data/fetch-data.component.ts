@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { getegid } from 'process';
 
 @Component({
   selector: 'app-fetch-data',
@@ -9,30 +8,49 @@ import { getegid } from 'process';
 })
 export class FetchDataComponent {
 
-  //Get method and contents for product displaying
+  /*Get method and contents for product displaying*/
 
   public products: Product[];
+  quantity = 1;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private fb: FormBuilder) {
     http.get<Product[]>(baseUrl + 'api/Products').subscribe(result => {
-      this.products = result;
+      var productsAtQuantity = result.filter(item => item.quantity >= 5)
+      this.products = productsAtQuantity;
     }, error => console.error(error));
   }
 
-  //Post method and contents for cart items
+  /*Post method and contents for cart items*/
+
+  getQuantityForm = this.fb.group({
+    quantity: ['']
+  });
 
   onClick(event) {
     var target = event.target;
     var ProductId = target.attributes.id.nodeValue * 1;
-    var CustomerId = "";
+
+    if (this.getQuantityForm.value) {
+      this.quantity = this.getQuantityForm.value;
+    }
 
     var cartItem = {
-      ProductId: ProductId,
-      CustomerId: CustomerId
+      productId: ProductId,
+      customerId: '',
+      quantity: this.quantity
     }
 
     this.http.post<CartItem>(this.baseUrl + 'api/CartItems', cartItem).subscribe();
 
+    this.http.get<Product>(this.baseUrl + `api/Products/${ProductId}`).subscribe(result => {
+      var updateQuantity = {
+        name: result.name,
+        price: result.price,
+        description: result.description,
+        quantity: result.quantity - this.quantity
+      }
+      this.http.put<Product>(this.baseUrl + `api/Products/${ProductId}`, updateQuantity).subscribe();
+    })
   }
 
 }
@@ -41,10 +59,10 @@ interface Product {
   name: string;
   price: number;
   description: string;
+  quantity: number;
 }
 
 interface CartItem {
-  name: string;
   productId: number;
   customerId: string;
 }

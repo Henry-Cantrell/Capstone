@@ -1,0 +1,22 @@
+<h1 id="tableLabel">Sales Made</h1>
+
+<p *ngIf="!salesItems"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="salesItems">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <!--<th>Customer</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sale of salesItems">
+      <td>{{ sale.name }}</td>
+      <td>{{ sale.quantity }}</td>
+      <!--<td>{{ sale.customer }}</td>-->
+    </tr>
+  </tbody>
+</table>
+
+

@@ -1,4 +1,4 @@
-<h1 id="tableLabel">Your cart</h1>
+<h1 id="tableLabel">Low Quantity Items</h1>
 
 <p *ngIf="!products"><em>Loading...</em></p>
 
@@ -8,19 +8,16 @@
       <th>Name</th>
       <th>Description</th>
       <th>Price</th>
+      <th>Quantity</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let product of products">
       <td>{{ product.name }}</td>
       <td>{{ product.description }}</td>
-      <td><button type="submit" id="{{product.id}}" (click)="onBuy($event)">Buy</button></td>
-      <td><button type="submit" id="{{product.id}}" (click)="onClick($event)">Remove</button></td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.quantity }}</td>
+      <td><button type="submit" id="{{product.id}}" (click)="onClick($event)">Reorder</button></td>
     </tr>
   </tbody>
 </table>
-
-<button *ngIf="products" type="submit" (click)="clearCart()">Purchase All</button>
-
-
-
