@@ -21,7 +21,8 @@ export class AddProductComponent {
     name: [''],
     description: [''],
     price: [''],
-    quantity: this.quantity
+    quantity: this.quantity,
+    categoryId: ['']
   });
 
   categoryForm = this.fb.group({
@@ -49,9 +50,11 @@ interface Product {
   description: string;
   price: number;
   quantity: number;
+  categoryId: number;
 }
 
 interface Category {
+  id: number;
   name: string;
   productList: string;
 }

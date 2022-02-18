@@ -30,7 +30,6 @@ export class SalesTableComponent {
       })
       this.salesItems = salesItemsPlaceholder;
     }, error => console.error(error));
-    console.log(this.salesItems)
   }
 }
 
@@ -40,6 +39,7 @@ interface Product {
   price: number;
   description: string;
   quantity: number;
+  categoryId: number;
 }
 
 interface Sales {

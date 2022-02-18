@@ -31,7 +31,8 @@ export class ReorderComponent {
         price: result.price,
         description: result.description,
         quantity: 10,
-        Id: ProductId
+        Id: ProductId,
+        categoryId: result.categoryId
       }
       this.http.put<Product>(this.baseUrl + `api/Products/${ProductId}`, product).subscribe();
     }, error => console.error(error));
@@ -51,6 +52,7 @@ interface Product {
   price: number;
   description: string;
   quantity: number;
+  categoryId: number;
 }
 
 

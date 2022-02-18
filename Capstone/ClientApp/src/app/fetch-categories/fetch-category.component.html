@@ -1,0 +1,17 @@
+<h1 id="tableLabel">Product Categories</h1>
+
+<p *ngIf="!categories"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="categories">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <td><button id="{{category.id}}" (click)="onSubmit($event)">{{ category.name }}</button></td>
+    </tr>
+  </tbody>
+</table>
+

@@ -67,6 +67,7 @@ interface Product {
   price: number;
   description: string;
   quantity: number;
+  categoryId: number;
 }
 
 interface CartItem {

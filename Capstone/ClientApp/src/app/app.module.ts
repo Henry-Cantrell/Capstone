@@ -14,6 +14,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { CartComponent } from './cart/cart.component';
 import { ReorderComponent } from './reorder/reorder.component';
 import { SalesTableComponent } from './sales-table/sales-table.component';
+import { FetchCategoryComponent } from './fetch-categories/fetch-category.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SalesTableComponent } from './sales-table/sales-table.component';
     AddProductComponent,
     CartComponent,
     ReorderComponent,
-    SalesTableComponent
+    SalesTableComponent,
+    FetchCategoryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,11 +36,12 @@ import { SalesTableComponent } from './sales-table/sales-table.component';
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+      { path: 'fetch-data/:id', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'add-product', component: AddProductComponent, canActivate: [AuthorizeGuard] },
       { path: 'cart', component: CartComponent, canActivate: [AuthorizeGuard] },
       { path: 'reorder', component: ReorderComponent, canActivate: [AuthorizeGuard] },
-      { path: 'sales-table', component: SalesTableComponent, canActivate: [AuthorizeGuard] }
+      { path: 'sales-table', component: SalesTableComponent, canActivate: [AuthorizeGuard] },
+      { path: 'fetch-category', component: FetchCategoryComponent, canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [

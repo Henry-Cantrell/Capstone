@@ -14,7 +14,8 @@
   <label for="quantity">Quantity: </label>
   <input id="quantity" type="number" formControlName="quantity">
 
-  <select formControlName="category" *ngFor="let category of categories">
+  <label for="category">Category: </label>
+  <select formControlName="categoryId" *ngFor="let category of categories">
     <option value="{{category.id}}">{{category.name}}</option>
   </select>
 

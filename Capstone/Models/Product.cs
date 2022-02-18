@@ -11,6 +11,7 @@ namespace Capstone.Models
         public string description { get; set; }
         public int price { get; set; }
         public int quantity { get; set; }
+        public int? categoryId { get; set; }
     }
     public class CartItem
     {
