@@ -36,6 +36,9 @@ export class ReorderComponent {
       this.http.put<Product>(this.baseUrl + `api/Products/${ProductId}`, product).subscribe();
     }, error => console.error(error));
 
+    this.http.get<Product[]>(this.baseUrl + 'api/LowQuantity').subscribe(result => {
+      this.products = result;
+    }, error => console.error(error));
 
     window.location.reload();
   }

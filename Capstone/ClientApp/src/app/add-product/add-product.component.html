@@ -1,4 +1,6 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<h1>Add product</h1>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmitProduct()">
 
   <label for="name">Name: </label>
   <input id="name" type="text" formControlName="name">
@@ -12,6 +14,21 @@
   <label for="quantity">Quantity: </label>
   <input id="quantity" type="number" formControlName="quantity">
 
+  <select formControlName="category" *ngFor="let category of categories">
+    <option value="{{category.id}}">{{category.name}}</option>
+  </select>
+
   <button type="submit" [disabled]="!productForm.valid">Submit</button>
+
+</form>
+
+<h1>Add product category</h1>
+
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmitCategory()">
+
+  <label for="name">Name: </label>
+  <input id="name" type="text" formControlName="name">
+
+  <button type="submit" [disabled]="!categoryForm.valid">Submit</button>
 
 </form>

@@ -21,13 +21,20 @@ namespace Capstone.Models
         public int ProductId { get; set; }
         public Product product { get; set; }
     }
-    public class Sale { 
+    public class Sale
+    {
         public int Id { get; set; }
         public string CustomerId { get; set; }
         public int quantity { get; set; }
         [ForeignKey("product")]
         public int ProductId { get; set; }
         public Product product { get; set; }
+    }
+    public class Category
+    {
+        public int Id { get; set; }
+        public string name { get; set; }
+        public string ProductIdList { get; set; }
     }
     public class ProductContext : DbContext
     {
@@ -38,5 +45,6 @@ namespace Capstone.Models
         public DbSet<Product> product { get; set; }
         public DbSet<CartItem> cartitem { get; set; }
         public DbSet<Sale> sale { get; set; }
-        }
+        public DbSet<Category> category { get; set; }
+    }
 }

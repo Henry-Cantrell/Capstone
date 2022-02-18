@@ -9,40 +9,33 @@ import { getegid } from 'process';
 })
 export class SalesTableComponent {
 
-  //Get method and contents for sales
-
-  public sales: Sales[] = [];
-  public products: Product[] = [];
   public salesItems: SalesItem[] = [];
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    http.get<Sales[]>(baseUrl + 'api/Sales').subscribe(result => {
-      this.sales = result;
-      let productPlaceHolder: Product[] = [];
-      this.sales.forEach(function (item) {
-        http.get<Product>(baseUrl + `api/Products/${item.productId}`).subscribe(result => {
-          result.quantity = item.quantity;
-          productPlaceHolder.push(result);
-        });
-      })
-     //this.products = productPlaceHolder;
+  //Get method and contents for sales
 
-     // let salesItemPlaceHolder: SalesItem[] = [];
-     // this.products.forEach(function (item) {
-     //   var saleItem = {
-     //     productName: item.name,
-     //     quantity: item.quantity,
-     //     customerEmail: ''
-     //   }
-     //   salesItemPlaceHolder.push(saleItem);
-     // })
-     // this.salesItems = salesItemPlaceHolder;
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+    let sales: any[] = [];
+    let salesItemsPlaceholder: any[] = [];
+    http.get<Sales[]>(baseUrl + 'api/Sales').subscribe(result => {
+      sales = result;
+      sales.forEach(function (item) {
+        http.get<Product>(baseUrl + `api/Products/${item.productId}`).subscribe(result => {
+          var saleItem = {
+            productName: result.name,
+            customerId: item.customerId,
+            quantity: result.quantity
+          }
+          salesItemsPlaceholder.push(saleItem);
+        })
+      })
+      this.salesItems = salesItemsPlaceholder;
     }, error => console.error(error));
+    console.log(this.salesItems)
   }
 }
 
 interface Product {
-  id: number;
+  id: number,
   name: string;
   price: number;
   description: string;
@@ -50,7 +43,7 @@ interface Product {
 }
 
 interface Sales {
-  name: string;
+  id: number,
   productId: number;
   customerId: string;
   quantity: number;

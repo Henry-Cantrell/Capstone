@@ -7,14 +7,14 @@
     <tr>
       <th>Product</th>
       <th>Quantity</th>
-      <!--<th>Customer</th>-->
+      <th>Cust ID</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let sale of salesItems">
-      <td>{{ sale.name }}</td>
+      <td>{{ sale.productName }}</td>
       <td>{{ sale.quantity }}</td>
-      <!--<td>{{ sale.customer }}</td>-->
+      <td>{{ sale.customerId }}</td>
     </tr>
   </tbody>
 </table>

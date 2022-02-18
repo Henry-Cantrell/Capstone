@@ -9,8 +9,12 @@ import { FormBuilder } from '@angular/forms';
 export class AddProductComponent {
 
   quantity = 10;
+  public categories: Category[] = [];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private fb: FormBuilder) {
+    http.get<Category[]>(baseUrl + 'api/Categories').subscribe(result => {
+      this.categories = result;
+    })
   }
 
   productForm = this.fb.group({
@@ -20,10 +24,21 @@ export class AddProductComponent {
     quantity: this.quantity
   });
 
-  onSubmit() {
+  categoryForm = this.fb.group({
+    name: [''],
+    productIdList: ['']
+  });
+
+  onSubmitProduct() {
     const formContents = this.productForm.value;
     this.quantity = formContents.quantity;
     this.http.post<Product>(this.baseUrl + 'api/Products', formContents).subscribe();
+    window.location.reload();
+  }
+
+  onSubmitCategory() {
+    const formContents = this.categoryForm.value;
+    this.http.post<Category>(this.baseUrl + 'api/Categories', formContents).subscribe();
     window.location.reload();
   }
 
@@ -34,4 +49,9 @@ interface Product {
   description: string;
   price: number;
   quantity: number;
+}
+
+interface Category {
+  name: string;
+  productList: string;
 }
