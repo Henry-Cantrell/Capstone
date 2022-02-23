@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +13,7 @@ namespace Capstone.Models
         public int price { get; set; }
         public int quantity { get; set; }
         public int? categoryId { get; set; }
+        public IFormFile? image { get; set; }
     }
     public class CartItem
     {

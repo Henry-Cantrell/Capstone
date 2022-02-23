@@ -22,7 +22,8 @@ export class AddProductComponent {
     description: [''],
     price: [''],
     quantity: this.quantity,
-    categoryId: ['']
+    categoryId: [''],
+    image: ['']
   });
 
   categoryForm = this.fb.group({
