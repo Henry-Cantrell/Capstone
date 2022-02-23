@@ -21,7 +21,6 @@ export class FetchDataComponent {
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private fb: FormBuilder, private _Activatedroute: ActivatedRoute) {
     //Assign id from passed param
     this.categoryId = Number(this._Activatedroute.snapshot.paramMap.get("id"));
-    console.log(this.categoryId);
 
     http.get<Product[]>(baseUrl + 'api/Products').subscribe(result => {
       var productsAtCriteria = result.filter(item => item.categoryId == this.categoryId && item.quantity >= 5)
