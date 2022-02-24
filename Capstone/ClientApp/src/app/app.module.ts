@@ -47,14 +47,14 @@ const config = {
     ReactiveFormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-data/:id', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'add-product', component: AddProductComponent, canActivate: [AuthorizeGuard] },
-      { path: 'cart', component: CartComponent, canActivate: [AuthorizeGuard] },
-      { path: 'reorder', component: ReorderComponent, canActivate: [AuthorizeGuard] },
-      { path: 'sales-table', component: SalesTableComponent, canActivate: [AuthorizeGuard] },
-      { path: 'fetch-category', component: FetchCategoryComponent, canActivate: [AuthorizeGuard] }
-    ])
+    { path: '', component: HomeComponent, pathMatch: 'full' },
+    { path: 'fetch-data/:id', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+    { path: 'add-product', component: AddProductComponent, canActivate: [AuthorizeGuard] },
+    { path: 'cart', component: CartComponent, canActivate: [AuthorizeGuard] },
+    { path: 'reorder', component: ReorderComponent, canActivate: [AuthorizeGuard] },
+    { path: 'sales-table', component: SalesTableComponent, canActivate: [AuthorizeGuard] },
+    { path: 'fetch-category', component: FetchCategoryComponent, canActivate: [AuthorizeGuard] }
+], { relativeLinkResolution: 'legacy' })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
