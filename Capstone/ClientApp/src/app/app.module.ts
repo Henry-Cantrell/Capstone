@@ -15,9 +15,21 @@ import { CartComponent } from './cart/cart.component';
 import { ReorderComponent } from './reorder/reorder.component';
 import { SalesTableComponent } from './sales-table/sales-table.component';
 import { FetchCategoryComponent } from './fetch-categories/fetch-category.component';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
+
+const config = {
+  apiKey: "AIzaSyBqnbDub928DIDh4SISasdI9HMacxt34_Q",
+  authDomain: "capstone-gsp.firebaseapp.com",
+  projectId: "capstone-gsp",
+  storageBucket: "capstone-gsp.appspot.com",
+  messagingSenderId: "88244378488",
+  appId: "1:88244378488:web:c8463f08631749a2da468d"
+}
 
 @NgModule({
   declarations: [
+    AngularFireModule.initializeApp(config),
     AppComponent,
     NavMenuComponent,
     HomeComponent,
