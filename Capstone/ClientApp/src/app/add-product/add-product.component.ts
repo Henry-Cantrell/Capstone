@@ -8,7 +8,6 @@ import { FormBuilder } from '@angular/forms';
 })
 export class AddProductComponent {
 
-  quantity = 10;
   public categories: Category[] = [];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private fb: FormBuilder) {
@@ -21,9 +20,10 @@ export class AddProductComponent {
     name: [''],
     description: [''],
     price: [''],
-    quantity: this.quantity,
+    quantity: 10,
     categoryId: [''],
-    image: ['']
+    ImageData: [''],
+    ImgDataUrl: ['']
   });
 
   categoryForm = this.fb.group({
@@ -33,9 +33,8 @@ export class AddProductComponent {
 
   onSubmitProduct() {
     const formContents = this.productForm.value;
-    this.quantity = formContents.quantity;
     this.http.post<Product>(this.baseUrl + 'api/Products', formContents).subscribe();
-    window.location.reload();
+    
   }
 
   onSubmitCategory() {
@@ -52,6 +51,8 @@ interface Product {
   price: number;
   quantity: number;
   categoryId: number;
+  ImageData: File;
+  ImgDataUrl: string;
 }
 
 interface Category {
