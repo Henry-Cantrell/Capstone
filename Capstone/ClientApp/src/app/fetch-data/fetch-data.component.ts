@@ -66,7 +66,7 @@ interface Product {
   description: string;
   quantity: number;
   categoryId: number;
-  imgDataUrl: string;
+  imgUrl: string;
 }
 
 interface CartItem {
