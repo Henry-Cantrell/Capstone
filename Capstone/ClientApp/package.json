@@ -30,12 +30,12 @@
     "oidc-client": "^1.11.3",
     "popper.js": "^1.16.0",
     "rxjs": "^6.6.3",
-    "zone.js": "0.11.4"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/architect": ">= 0.900 < 0.1300",
     "@angular-devkit/build-angular": "^13.2.5",
-    "@angular/cli": "^11.2.18",
+    "@angular/cli": "^12.2.16",
     "@angular/compiler-cli": "^13.2.4",
     "@angular/language-service": "^13.2.4",
     "@types/jasmine": "~3.6.0",
