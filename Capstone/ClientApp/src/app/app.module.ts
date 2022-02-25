@@ -15,8 +15,8 @@ import { CartComponent } from './cart/cart.component';
 import { ReorderComponent } from './reorder/reorder.component';
 import { SalesTableComponent } from './sales-table/sales-table.component';
 import { FetchCategoryComponent } from './fetch-categories/fetch-category.component';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireModule } from '@angular/fire';
+import {  } from '@angular/fire/storage';
+import * as angularFire from '@angular/fire';
 
 const config = {
   apiKey: "AIzaSyBqnbDub928DIDh4SISasdI9HMacxt34_Q",
