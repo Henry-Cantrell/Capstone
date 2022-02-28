@@ -25,6 +25,7 @@ export class FetchDataComponent {
     http.get<Product[]>(baseUrl + 'api/Products').subscribe(result => {
       var productsAtCriteria = result.filter(item => item.categoryId == this.categoryId && item.quantity >= 5)
       this.products = productsAtCriteria
+
     }, error => console.error(error));
   }
 
@@ -51,15 +52,8 @@ export class FetchDataComponent {
     this.http.post<CartItem>(this.baseUrl + 'api/CartItems', cartItem).subscribe();
 
     this.http.get<Product>(this.baseUrl + `api/Products/${ProductId}`).subscribe(result => {
-      var updateQuantity = {
-        Id: ProductId,
-        name: result.name,
-        price: result.price,
-        description: result.description,
-        quantity: result.quantity - this.quantity,
-        categoryId: result.categoryId
-      }
-      this.http.put<Product>(this.baseUrl + `api/Products/${ProductId}`, updateQuantity).subscribe();
+      result.quantity = result.quantity - this.quantity;
+      this.http.put<Product>(this.baseUrl + `api/Products/${ProductId}`, result).subscribe();
     })
   }
 
@@ -72,6 +66,7 @@ interface Product {
   description: string;
   quantity: number;
   categoryId: number;
+  imgUrl: string;
 }
 
 interface CartItem {

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "capstone-gsp": {
+      "hosting": {
+        "Capstone": [
+          "capstone-gsp"
+        ]
+      }
+    }
+  }
+}

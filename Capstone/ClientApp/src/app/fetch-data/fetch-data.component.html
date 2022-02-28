@@ -16,6 +16,7 @@
         <td>{{ product.name }}</td>
         <td>{{ product.description }}</td>
         <td>{{ product.price }}</td>
+        <td *ngIf="{{product.imgUrl}}"><img  style="height:250px;width:250px;" src="{{product.imgUrl}}" /></td>
         <td>
           <select formControlName="quantity">
             <option value="1">1</option>

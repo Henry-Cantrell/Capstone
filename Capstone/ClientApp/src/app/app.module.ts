@@ -15,6 +15,19 @@ import { CartComponent } from './cart/cart.component';
 import { ReorderComponent } from './reorder/reorder.component';
 import { SalesTableComponent } from './sales-table/sales-table.component';
 import { FetchCategoryComponent } from './fetch-categories/fetch-category.component';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+//import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+//import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+
+const config = {
+  apiKey: "AIzaSyBqnbDub928DIDh4SISasdI9HMacxt34_Q",
+  authDomain: "capstone-gsp.firebaseapp.com",
+  projectId: "capstone-gsp",
+  storageBucket: "capstone-gsp.appspot.com",
+  messagingSenderId: "88244378488",
+  appId: "1:88244378488:web:c8463f08631749a2da468d"
+}
 
 @NgModule({
   declarations: [
@@ -29,20 +42,22 @@ import { FetchCategoryComponent } from './fetch-categories/fetch-category.compon
     FetchCategoryComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(config),
+    AngularFireStorageModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-data/:id', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'add-product', component: AddProductComponent, canActivate: [AuthorizeGuard] },
-      { path: 'cart', component: CartComponent, canActivate: [AuthorizeGuard] },
-      { path: 'reorder', component: ReorderComponent, canActivate: [AuthorizeGuard] },
-      { path: 'sales-table', component: SalesTableComponent, canActivate: [AuthorizeGuard] },
-      { path: 'fetch-category', component: FetchCategoryComponent, canActivate: [AuthorizeGuard] }
-    ])
+    { path: '', component: HomeComponent, pathMatch: 'full' },
+    { path: 'fetch-data/:id', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+    { path: 'add-product', component: AddProductComponent, canActivate: [AuthorizeGuard] },
+    { path: 'cart', component: CartComponent, canActivate: [AuthorizeGuard] },
+    { path: 'reorder', component: ReorderComponent, canActivate: [AuthorizeGuard] },
+    { path: 'sales-table', component: SalesTableComponent, canActivate: [AuthorizeGuard] },
+    { path: 'fetch-category', component: FetchCategoryComponent, canActivate: [AuthorizeGuard] }
+], { relativeLinkResolution: 'legacy' })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
