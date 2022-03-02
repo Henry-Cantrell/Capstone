@@ -30,8 +30,7 @@ export class AddProductComponent {
   });
 
   categoryForm = this.fb.group({
-    name: [''],
-    productIdList: [''],
+    catName: [''],
     imgUrl: ['']
   });
 
@@ -71,7 +70,7 @@ export class AddProductComponent {
   async onSubmitCategory() {
     const basePath = '/categories';
     const fi = this.imageFileCat.nativeElement;
-    const filePath = `${basePath}/${this.categoryForm.value.name}`;
+    const filePath = `${basePath}/${this.categoryForm.value.catName}`;
 
     if (fi.files && fi.files[0]) {
       let image = fi.files[0];
@@ -83,7 +82,7 @@ export class AddProductComponent {
 
       await storageRef.getDownloadURL().subscribe(downloadURL => {
         const formContents = {
-          name: this.productForm.value.name,
+          name: this.categoryForm.value.catName,
           imgUrl: downloadURL
         }
         this.http.post<Category>(this.baseUrl + 'api/Categories', formContents).subscribe();
@@ -94,7 +93,7 @@ export class AddProductComponent {
     }
     else {
       const formContents = {
-        name: this.categoryForm.value.name,
+        name: this.categoryForm.value.catName,
         imgUrl: "assets/images/default-prod-img.jpg"
       }
       this.http.post<Category>(this.baseUrl + 'api/Categories', formContents).subscribe();
