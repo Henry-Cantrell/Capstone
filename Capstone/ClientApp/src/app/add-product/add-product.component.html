@@ -22,7 +22,7 @@
     <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
   </select>
 
-  <button type="submit" [disabled]="!productForm.valid">Submit</button>
+  <button type="submit" [disabled]="!productForm.valid" class="btn btn-primary">Submit</button>
 
 </form>
 
@@ -36,6 +36,6 @@
   <label for="ImageData">Image: </label>
   <input #imageFileCat type="file">
 
-  <button type="submit" [disabled]="!categoryForm.valid">Submit</button>
+  <button type="submit" [disabled]="!categoryForm.valid" class="btn btn-primary">Submit</button>
 
 </form>

@@ -17,8 +17,8 @@
       <td>{{ product.description }}</td>
       <td>{{ product.price }}</td>
       <td>{{ product.quantity }}</td>
-      <td><button type="submit" id="{{product.id}}" (click)="onBuy($event)">Buy</button></td>
-      <td><button type="submit" id="{{product.id}}" (click)="onClick($event)">Remove</button></td>
+      <td><button type="submit" id="{{product.id}}" (click)="onBuy($event)" class="btn btn-primary">Buy</button></td>
+      <td><button type="submit" id="{{product.id}}" (click)="onClick($event)" class="btn btn-danger">Remove</button></td>
     </tr>
   </tbody>
 </table>
