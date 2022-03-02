@@ -69,7 +69,6 @@ export class AddProductComponent {
   }
 
   async onSubmitCategory() {
-    console.log("Into")
     const basePath = '/categories';
     const fi = this.imageFileCat.nativeElement;
     const filePath = `${basePath}/${this.categoryForm.value.name}`;
@@ -77,12 +76,11 @@ export class AddProductComponent {
     if (fi.files && fi.files[0]) {
       let image = fi.files[0];
       await this.storage.upload(filePath, image)
-    }
+    
 
     //save product details in Dotnet backend
-    const storageRef = this.storage.ref(filePath);
+      const storageRef = this.storage.ref(filePath);
 
-    if (await storageRef.getDownloadURL() != null) {
       await storageRef.getDownloadURL().subscribe(downloadURL => {
         const formContents = {
           name: this.productForm.value.name,
@@ -93,12 +91,15 @@ export class AddProductComponent {
     }
     else {
       const formContents = {
-        name: this.productForm.value.name,
-        imgUrl: "assets/images/default-prod.img.jpg"
+        name: this.categoryForm.value.name,
+        imgUrl: "assets/images/default-prod-img.jpg"
       }
       this.http.post<Category>(this.baseUrl + 'api/Categories', formContents).subscribe();
     }
   }
+
+  //reload page
+  window.location.reload();
 
 }
 
