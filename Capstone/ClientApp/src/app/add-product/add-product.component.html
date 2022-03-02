@@ -1,0 +1,41 @@
+<h1>Add product</h1>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmitProduct()">
+
+  <label for="name">Name: </label>
+  <input id="name" type="text" formControlName="name">
+
+  <label for="ImageData">Image: </label>
+  <input #imageFile type="file">
+
+  <label for="description">Description: </label>
+  <input id="description" type="text" formControlName="description">
+
+  <label for="price">Price: </label>
+  <input id="price" type="number" formControlName="price">
+
+  <label for="quantity">Quantity: </label>
+  <input id="quantity" type="number" formControlName="quantity">
+
+  <label for="category">Category: </label>
+  <select formControlName="categoryId">
+    <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+  </select>
+
+  <button type="submit" [disabled]="!productForm.valid">Submit</button>
+
+</form>
+
+<h1>Add product category</h1>
+
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmitCategory()">
+
+  <label for="name">Name: </label>
+  <input id="name" type="text" formControlName="name">
+
+  <label for="ImageData">Image: </label>
+  <input #imageFileCat type="file">
+
+  <button type="submit" [disabled]="!categoryForm.valid">Submit</button>
+
+</form>

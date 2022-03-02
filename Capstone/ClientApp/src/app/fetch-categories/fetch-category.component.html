@@ -1,0 +1,23 @@
+<h1 id="tableLabel">Product Categories</h1>
+
+<p *ngIf="!categories"><em>Loading...</em></p>
+
+<div id="products" style="margin-top:50px;">
+  <div class="row mx-0">
+    <div class="col-lg-4 col-md-6" *ngFor="let category of categories">
+      <div class="card d-flex flex-column align-items-center">
+        <div class="product-name">
+          <p class="lead">
+            {{category.name}}
+          </p>
+        </div>
+        <div class="card-img">
+          <img src="{{category.imgUrl}}" style="width:250px; height:250px;margin-left:40px;">
+        </div>
+        <button id="{{category.id}}" (click)="onSubmit($event)" class="btn btn-secondary" style="margin-top:15px; margin-bottom:15px;">View</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
