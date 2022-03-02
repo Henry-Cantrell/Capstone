@@ -87,6 +87,9 @@ export class AddProductComponent {
           imgUrl: downloadURL
         }
         this.http.post<Category>(this.baseUrl + 'api/Categories', formContents).subscribe();
+
+        //reload page
+        window.location.reload();
       });
     }
     else {
@@ -95,12 +98,11 @@ export class AddProductComponent {
         imgUrl: "assets/images/default-prod-img.jpg"
       }
       this.http.post<Category>(this.baseUrl + 'api/Categories', formContents).subscribe();
+
+      //reload page
+      window.location.reload();
     }
   }
-
-  //reload page
-  window.location.reload();
-
 }
 
 interface Product {
